@@ -558,10 +558,11 @@ class FigureManagerTk(FigureManagerBase):
 
 
 class NavigationToolbar2Tk(NavigationToolbar2, tk.Frame):
+
     window = _api.deprecated("3.6", alternative="self.master")(
         property(lambda self: self.master))
 
-    def __init__(self, canvas, window=None, *, pack_toolbar=True):
+    def __init__(self, canvas, window=None, *, pack_toolbar=True, toolitems=NavigationToolbar2.toolitems):
         """
         Parameters
         ----------
@@ -582,7 +583,7 @@ class NavigationToolbar2Tk(NavigationToolbar2, tk.Frame):
                           width=int(canvas.figure.bbox.width), height=50)
 
         self._buttons = {}
-        for text, tooltip_text, image_file, callback in self.toolitems:
+        for text, tooltip_text, image_file, callback in toolitems:
             if text is None:
                 # Add a spacer; return value is unused.
                 self._Spacer()
